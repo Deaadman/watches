@@ -16,9 +16,11 @@ public class WatchItem : MonoBehaviour
     private float _currentBatteryCharge = 1f;
     
     private Color _frozenColour;
+#pragma warning disable CS8618
     private DisplayTime _displayTime;
     private GearItem _gearItem;
     private TimeOfDay _timeOfDay;
+#pragma warning restore CS8618
     internal WatchType WatchType;
     
     private void Awake()
