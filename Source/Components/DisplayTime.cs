@@ -6,6 +6,7 @@ namespace Watches.Components;
 [RegisterTypeInIl2Cpp(false)]
 public class DisplayTime : MonoBehaviour
 {
+#pragma warning disable CS8618
     internal GameObject AnalogTime;
     internal GameObject DurationObject;
     internal UILabel DigitalTimeLabel;
@@ -13,6 +14,7 @@ public class DisplayTime : MonoBehaviour
     internal UISprite DurationObjectForegroundSprite;
     internal UISprite HourHandSprite;
     internal UISprite MinuteHandSprite;
+#pragma warning restore CS8618
 
     private void Start()
     {
@@ -36,13 +38,16 @@ public class DisplayTime : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!DigitalTimeLabel.gameObject.active && !AnalogTime.gameObject.active) return;
+        if (!DigitalTimeLabel.gameObject.active && !AnalogTime.gameObject.active) 
+            return;
     
         var accessoryGearItem = GameManager.GetPlayerManagerComponent().GetClothingInSlot(ClothingRegion.Accessory, ClothingLayer.Base);
         if (accessoryGearItem?.GetComponent<WatchItem>() is null)
         {
             DigitalTimeLabel.gameObject.SetActive(false);
-            if (!WatchItem.WasTimeChecked) AnalogTime.gameObject.SetActive(false);
+            if (!WatchItem.WasTimeChecked) 
+                AnalogTime.gameObject.SetActive(false);
+
             return;
         }
         
@@ -52,6 +57,7 @@ public class DisplayTime : MonoBehaviour
             case WatchType.Digital:
                 watchItem.UpdateDigitalTime();
                 break;
+
             case WatchType.Analog:
                 watchItem.UpdateAnalogTime();
                 break;
