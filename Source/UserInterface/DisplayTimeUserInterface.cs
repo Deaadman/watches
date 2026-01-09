@@ -13,7 +13,7 @@ internal static class DisplayTimeUserInterface
             hourMarker.transform.SetParent(clockObject.transform, false);
 
             var label = hourMarker.AddComponent<UILabel>();
-            SetupUILabel(
+            SetupUiLabel(
                 label,
                 i.ToString(),
                 FontStyle.Normal,
@@ -45,7 +45,7 @@ internal static class DisplayTimeUserInterface
         clockCircle.transform.localScale = Vector3.one;
         
         var clockSprite = clockCircle.AddComponent<UISprite>();
-        SetupUISprite(
+        SetupUiSprite(
             clockSprite,
             "featSlot"
         );
@@ -60,7 +60,7 @@ internal static class DisplayTimeUserInterface
         hourHandSprite.pivot = UIWidget.Pivot.Left;
         hourHandSprite.width = 18;
         hourHandSprite.height = 10;
-        SetupUISprite(
+        SetupUiSprite(
             hourHandSprite,
             "ico_almanac_arrow"
         );
@@ -73,7 +73,7 @@ internal static class DisplayTimeUserInterface
         minuteHandSprite.pivot = UIWidget.Pivot.Left;
         minuteHandSprite.width = 25;
         minuteHandSprite.height = 10;
-        SetupUISprite(
+        SetupUiSprite(
             minuteHandSprite,
             "ico_almanac_arrow"
         );
@@ -88,7 +88,7 @@ internal static class DisplayTimeUserInterface
         gameObject.SetActive(false);
         
         var uiLabel = gameObject.AddComponent<UILabel>();
-        SetupUILabel(
+        SetupUiLabel(
             uiLabel,
             string.Empty,
             FontStyle.Normal,
@@ -110,7 +110,7 @@ internal static class DisplayTimeUserInterface
         var batterySprite = batteryIcon.AddComponent<UISprite>();
         batterySprite.width = 42;
         batterySprite.height = 42;
-        SetupUISprite(
+        SetupUiSprite(
             batterySprite,
             "ico_lightSource_flashlight"
         );
@@ -127,14 +127,14 @@ internal static class DisplayTimeUserInterface
         return gameObject;
     }
 
-    private static void SetupUILabel(
+    private static void SetupUiLabel(
             UILabel label,
             string text,
             FontStyle fontStyle,
             UILabel.Crispness crispness,
             NGUIText.Alignment alignment,
             UILabel.Overflow overflow,
-            bool mulitLine,
+            bool multiLine,
             int depth,
             int fontSize,
             Color color,
@@ -148,16 +148,16 @@ internal static class DisplayTimeUserInterface
         label.keepCrispWhenShrunk = crispness;
         label.alignment = alignment;
         label.overflowMethod = overflow;
-        label.multiLine = mulitLine;
+        label.multiLine = multiLine;
         label.depth = depth;
         label.fontSize = fontSize;
         label.color = color;
         label.capsLock = capsLock;
     }
     
-    private static void SetupUISprite(UISprite sprite, string spriteName)
+    private static void SetupUiSprite(UISprite sprite, string spriteName)
     {
-        var baseAtlas = InterfaceManager.GetPanel<Panel_HUD>().m_AltFireGamepadButtonSprite.atlas;
+        var baseAtlas = InterfaceManager.GetInstance().m_ScalableAtlases[0] ?? throw new NullReferenceException("The index of 0 in m_ScalableAtlases is null.");
         var spriteData = baseAtlas.GetSprite(spriteName);
 
         sprite.atlas = baseAtlas;
